@@ -1084,6 +1084,7 @@
     "admin_dashboard": "Dashboard",
     "doc": "Docs",
     "graphql": "GraphQL",
+    "grpc": "gRPC",
     "profile": "Profile",
     "realtime": "Realtime",
     "rest": "REST",

@@ -5,21 +5,11 @@ import type {
   GRPCServiceDefinition,
   ParsedGRPCSchema,
 } from "./types"
-
-const normalizePath = (path: string): string => {
-  const parts: string[] = []
-
-  for (const part of path.replaceAll("\\", "/").split("/")) {
-    if (!part || part === ".") continue
-    if (part === "..") parts.pop()
-    else parts.push(part)
-  }
-
-  return parts.join("/")
-}
+import { parseGRPCRequestBody } from "./body"
+import { normalizeGRPCProtoPath } from "./proto-source"
 
 const dirname = (path: string): string => {
-  const normalized = normalizePath(path)
+  const normalized = normalizeGRPCProtoPath(path)
   const separator = normalized.lastIndexOf("/")
   return separator === -1 ? "" : normalized.slice(0, separator)
 }
@@ -77,15 +67,17 @@ export async function parseGRPCProtoFiles(
   }
 
   const files = new Map(
-    protoFiles.map((file) => [normalizePath(file.name), file.content])
+    protoFiles.map((file) => [normalizeGRPCProtoPath(file.name), file.content])
   )
   const root = new Root()
 
   root.resolvePath = (origin, target) => {
-    const normalizedTarget = normalizePath(target)
+    const normalizedTarget = normalizeGRPCProtoPath(target)
     if (files.has(normalizedTarget)) return normalizedTarget
 
-    const relativeTarget = normalizePath(`${dirname(origin)}/${target}`)
+    const relativeTarget = normalizeGRPCProtoPath(
+      `${dirname(origin)}/${target}`
+    )
     if (files.has(relativeTarget)) return relativeTarget
 
     const suffixMatch = [...files.keys()].find((fileName) =>
@@ -96,7 +88,7 @@ export async function parseGRPCProtoFiles(
   }
 
   root.fetch = (filename, callback) => {
-    const content = files.get(normalizePath(filename))
+    const content = files.get(normalizeGRPCProtoPath(filename))
     if (content === undefined) {
       callback(new Error(`Imported proto file not found: ${filename}`))
       return
@@ -149,7 +141,7 @@ export function encodeGRPCRequestBody(type: Type, body: string): Uint8Array {
   let input: unknown
 
   try {
-    input = JSON.parse(body)
+    input = parseGRPCRequestBody(body)
   } catch (error) {
     throw new Error(
       `Invalid JSON request body: ${error instanceof Error ? error.message : String(error)}`

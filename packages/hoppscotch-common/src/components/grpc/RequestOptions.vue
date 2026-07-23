@@ -37,13 +37,7 @@ const removeMetadata = (index: number) =>
         }}<span v-if="tab === 'proto'"> ({{ request.protoFiles.length }})</span>
       </button>
     </div>
-    <textarea
-      v-if="optionTab === 'body'"
-      v-model="request.body"
-      class="h-full min-h-64 resize-none bg-primary p-4 font-mono"
-      spellcheck="false"
-      aria-label="Request JSON"
-    />
+    <GrpcRequestBody v-if="optionTab === 'body'" v-model="request.body" />
     <div v-else-if="optionTab === 'metadata'" class="flex flex-col gap-2 p-4">
       <div
         v-for="(entry, index) in request.metadata"

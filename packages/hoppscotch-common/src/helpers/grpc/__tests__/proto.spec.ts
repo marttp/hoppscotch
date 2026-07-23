@@ -3,6 +3,7 @@ import {
   decodeGRPCResponseBody,
   encodeGRPCRequestBody,
   findGRPCMethod,
+  getDefaultGRPCRequestBody,
   parseGRPCProtoFiles,
 } from "../proto"
 
@@ -48,6 +49,26 @@ describe("gRPC proto parsing and codec", () => {
     expect(schema.services[0].methods[1].responseStream).toBe(true)
   })
 
+  test("prefers relative paths when duplicate basenames exist", async () => {
+    const schema = await parseGRPCProtoFiles([
+      {
+        name: "services/echo.proto",
+        content: SERVICE_PROTO.replace(
+          'import "messages.proto";',
+          'import "../types/messages.proto";'
+        ),
+      },
+      { name: "types/messages.proto", content: MESSAGES_PROTO },
+      {
+        name: "legacy/messages.proto",
+        content: MESSAGES_PROTO.replaceAll("Echo", "Legacy"),
+      },
+    ])
+
+    const method = findGRPCMethod(schema, "echo.v1.EchoService", "Echo")
+    expect(method?.requestType.name).toBe("EchoRequest")
+  })
+
   test("encodes JSON and decodes protobuf with JSON-safe int64 values", async () => {
     const schema = await parseGRPCProtoFiles([
       { name: "echo.proto", content: SERVICE_PROTO },
@@ -55,9 +76,13 @@ describe("gRPC proto parsing and codec", () => {
     ])
     const method = findGRPCMethod(schema, "echo.v1.EchoService", "Echo")!
 
+    expect(getDefaultGRPCRequestBody(method.requestType)).toBe(
+      '{\n  "message": ""\n}'
+    )
+
     const encodedRequest = encodeGRPCRequestBody(
       method.requestType,
-      '{"message":"hello"}'
+      '{\n\u00a0 "message": "hello"\n}'
     )
     expect(method.requestType.decode(encodedRequest).message).toBe("hello")
 

@@ -31,7 +31,7 @@ export function getDefaultGRPCRequest(): HoppGRPCRequest {
     protoFiles: [],
     service: "",
     method: "",
-    body: "{}",
+    body: "{\n}",
     metadata: [],
   }
 }

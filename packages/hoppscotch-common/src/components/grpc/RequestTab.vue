@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core"
-import { cloneDeep, isEqual } from "lodash-es"
-import { computed, watch } from "vue"
+import { computed } from "vue"
 import { useGRPCRequest } from "~/composables/useGRPCRequest"
+import { useGRPCRequestDirtyState } from "~/composables/useGRPCRequestDirtyState"
 import { getDefaultGRPCRequestBody } from "~/helpers/grpc"
 import type { HoppGRPCDocument } from "~/helpers/grpc/document"
 import type { HoppTab } from "~/services/tab"
@@ -18,6 +18,7 @@ const document = computed({
 })
 const { services, methods, schemaError, isParsing, isLoading, send, cancel } =
   useGRPCRequest(document)
+useGRPCRequestDirtyState(document)
 
 const selectService = (service: string) => {
   tab.value.document.request.service = service
@@ -39,18 +40,6 @@ const selectMethod = (methodName: string) => {
       method.requestType
     )
 }
-
-let previousRequest = cloneDeep(tab.value.document.request)
-watch(
-  () => tab.value.document.request,
-  (request) => {
-    if (!tab.value.document.isDirty && !isEqual(previousRequest, request)) {
-      tab.value.document.isDirty = true
-    }
-    previousRequest = cloneDeep(request)
-  },
-  { deep: true }
-)
 </script>
 
 <template>

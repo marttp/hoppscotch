@@ -21,6 +21,7 @@ const t = useI18n()
 const responseEditor = useTemplateRef<HTMLDivElement>("responseEditor")
 const wrapLines = useNestedSetting("WRAP_LINES", "httpResponseBody")
 const activeTab = shallowRef<"body" | "metadata" | "trailers">("body")
+const responseTabs = ["body", "metadata", "trailers"] as const
 
 const responseBody = computed(() => props.response?.message ?? "")
 
@@ -94,11 +95,20 @@ const { downloadIcon, downloadResponse } = useDownloadResponse(
       <div
         class="flex flex-shrink-0 items-center justify-between border-b border-dividerLight bg-primary pl-4"
       >
-        <div class="flex self-stretch">
+        <div
+          class="flex self-stretch"
+          role="tablist"
+          :aria-label="t('response.title')"
+        >
           <button
-            v-for="tab in ['body', 'metadata', 'trailers'] as const"
+            v-for="tab in responseTabs"
+            :id="`grpc-response-${tab}-tab`"
             :key="tab"
             type="button"
+            role="tab"
+            :aria-selected="activeTab === tab"
+            :aria-controls="`grpc-response-${tab}-panel`"
+            :tabindex="activeTab === tab ? 0 : -1"
             class="px-4 text-secondaryLight"
             :class="
               activeTab === tab && 'border-b-2 border-accent text-secondaryDark'
@@ -134,12 +144,18 @@ const { downloadIcon, downloadResponse } = useDownloadResponse(
       </div>
       <div
         v-show="activeTab === 'body'"
+        id="grpc-response-body-panel"
+        role="tabpanel"
+        aria-labelledby="grpc-response-body-tab"
         class="relative min-h-64 flex-1 overflow-auto bg-primary"
       >
         <div ref="responseEditor" class="absolute inset-0"></div>
       </div>
       <div
         v-if="activeTab !== 'body'"
+        :id="`grpc-response-${activeTab}-panel`"
+        role="tabpanel"
+        :aria-labelledby="`grpc-response-${activeTab}-tab`"
         class="flex min-h-64 flex-1 flex-col overflow-auto bg-primary"
       >
         <div

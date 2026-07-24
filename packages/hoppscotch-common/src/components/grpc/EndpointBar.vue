@@ -3,10 +3,11 @@ import type {
   GRPCMethodDefinition,
   GRPCServiceDefinition,
 } from "~/helpers/grpc"
+import { computed } from "vue"
 import IconSend from "~icons/lucide/send"
 import IconX from "~icons/lucide/x"
 
-defineProps<{
+const props = defineProps<{
   url: string
   service: string
   method: string
@@ -15,13 +16,21 @@ defineProps<{
   loading: boolean
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (event: "update:url", value: string): void
   (event: "update:service", value: string): void
   (event: "update:method", value: string): void
   (event: "send"): void
   (event: "cancel"): void
 }>()
+
+const canSend = computed(
+  () => !props.loading && !!props.service && !!props.method
+)
+
+const send = () => {
+  if (canSend.value) emit("send")
+}
 </script>
 
 <template>
@@ -32,7 +41,7 @@ defineEmits<{
       placeholder="http://localhost:8080"
       aria-label="gRPC server URL"
       @input="$emit('update:url', ($event.target as HTMLInputElement).value)"
-      @keydown.enter="$emit('send')"
+      @keydown.enter="send"
     />
     <select
       :value="service"
@@ -70,8 +79,8 @@ defineEmits<{
       v-if="!loading"
       label="Invoke"
       :icon="IconSend"
-      :disabled="!service || !method"
-      @click="$emit('send')"
+      :disabled="!canSend"
+      @click="send"
     />
     <HoppButtonSecondary
       v-else

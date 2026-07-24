@@ -23,6 +23,9 @@ describe("gRPC unary transport", () => {
     const responseMessage = method.responseType
       .encode(method.responseType.fromObject({ message: "hello" }))
       .finish()
+    const requestMessage = method.requestType
+      .encode(method.requestType.fromObject({ message: "hello" }))
+      .finish()
     const responseBody = frameGRPCMessage(responseMessage)
     const relayResponse: RelayResponse = {
       id: 1,
@@ -55,9 +58,7 @@ describe("gRPC unary transport", () => {
     const execution = executeGRPCUnary({
       baseURL: "http://localhost:8080/",
       method,
-      body: method.requestType
-        .encode(method.requestType.fromObject({ message: "hello" }))
-        .finish(),
+      body: requestMessage,
       metadata: [
         { key: "authorization", value: "Bearer token", active: true },
         { key: "ignored", value: "value", active: false },
@@ -71,6 +72,7 @@ describe("gRPC unary transport", () => {
     expect(request.url).toBe("http://localhost:8080/echo.v1.EchoService/Echo")
     expect(request.version).toBe("HTTP/2.0")
     expect(request.content.kind).toBe("binary")
+    expect(request.content.content).toEqual(frameGRPCMessage(requestMessage))
     expect(request.headers["content-type"]).toBe("application/grpc")
     expect(request.headers.te).toBe("trailers")
     expect(request.headers.authorization).toBe("Bearer token")
@@ -80,6 +82,15 @@ describe("gRPC unary transport", () => {
       expect(JSON.parse(result.right.message)).toEqual({ message: "hello" })
       expect(result.right.status).toBe(0)
       expect(result.right.duration).toBe(15)
+      expect(result.right.metadata).toEqual([
+        { key: "content-type", value: "application/grpc" },
+      ])
+      expect(result.right.trailers).toEqual(
+        expect.arrayContaining([
+          { key: "grpc-status", value: "0" },
+          { key: "grpc-message", value: "OK" },
+        ])
+      )
     }
   })
 
@@ -129,4 +140,58 @@ describe("gRPC unary transport", () => {
       )
     }
   })
+
+  test.each([
+    [400, "INTERNAL"],
+    [401, "UNAUTHENTICATED"],
+    [403, "PERMISSION_DENIED"],
+    [404, "UNIMPLEMENTED"],
+    [429, "UNAVAILABLE"],
+    [502, "UNAVAILABLE"],
+    [503, "UNAVAILABLE"],
+    [504, "UNAVAILABLE"],
+    [418, "UNKNOWN"],
+    [200, "UNKNOWN"],
+  ])(
+    "maps HTTP %i when grpc-status is missing",
+    async (httpStatus, expectedStatus) => {
+      const schema = await parseGRPCProtoFiles([
+        { name: "echo.proto", content: PROTO },
+      ])
+      const method = schema.services[0].methods[0]
+      const responseBody = new TextEncoder().encode("<html>failure</html>")
+      const relayResponse = {
+        id: 1,
+        status: httpStatus,
+        statusText: "Error",
+        version: "HTTP/2.0",
+        headers: { "content-type": "text/html" },
+        body: { mediaType: "text/html", body: responseBody },
+        meta: {
+          timing: { start: 0, end: 1 },
+          size: {
+            headers: 0,
+            body: responseBody.byteLength,
+            total: responseBody.byteLength,
+          },
+        },
+      } satisfies RelayResponse
+
+      const result = await executeGRPCUnary({
+        baseURL: "http://localhost:8080",
+        method,
+        body: new Uint8Array(),
+        metadata: [],
+        execute: () => ({
+          cancel: async () => {},
+          response: Promise.resolve(E.right(relayResponse)),
+        }),
+      }).response
+
+      expect(E.isLeft(result)).toBe(true)
+      if (E.isLeft(result)) {
+        expect((result.left as Error).message).toBe(expectedStatus)
+      }
+    }
+  )
 })

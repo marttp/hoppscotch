@@ -79,25 +79,34 @@ const GRPC_TRAILER_NAMES = new Set([
   "grpc-status-details-bin",
 ])
 
+const grpcStatusFromHTTPStatus = (status: number): number => {
+  if (status === 400) return 13
+  if (status === 401) return 16
+  if (status === 403) return 7
+  if (status === 404) return 12
+  if ([429, 502, 503, 504].includes(status)) return 14
+  return 2
+}
+
 const transformResponse = (
   response: RelayResponse,
   method: GRPCMethodDefinition
 ): GRPCUnaryResponse => {
-  const parsed = parseGRPCResponse(response.body.body)
-  const metadata = responseHeaders(response)
-  const trailers = metadata.filter((entry) =>
+  const responseMetadata = responseHeaders(response)
+  const trailers = responseMetadata.filter((entry) =>
     GRPC_TRAILER_NAMES.has(entry.key.toLowerCase())
   )
-  const rawStatus = findMetadata(metadata, "grpc-status")
+  const metadata = responseMetadata.filter(
+    (entry) => !GRPC_TRAILER_NAMES.has(entry.key.toLowerCase())
+  )
+  const rawStatus = findMetadata(responseMetadata, "grpc-status")
   const status =
     rawStatus === undefined
-      ? response.status === 200
-        ? 2
-        : 14
+      ? grpcStatusFromHTTPStatus(response.status)
       : Number(rawStatus)
   const statusText = STATUS_TEXT[status] ?? `STATUS_${status}`
   const statusMessage = decodeStatusMessage(
-    findMetadata(metadata, "grpc-message")
+    findMetadata(responseMetadata, "grpc-message")
   )
 
   if (!Number.isInteger(status)) {
@@ -109,6 +118,8 @@ const transformResponse = (
       statusMessage ? `${statusText}: ${statusMessage}` : statusText
     )
   }
+
+  const parsed = parseGRPCResponse(response.body.body)
 
   if (parsed.messages.length !== 1) {
     throw new Error(

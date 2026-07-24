@@ -9,6 +9,7 @@ import {
   getDefaultGRPCRequestBody,
   isUnaryGRPCMethod,
   parseGRPCProtoFiles,
+  supportsGRPC,
   type ParsedGRPCSchema,
 } from "~/helpers/grpc"
 import { getCombinedEnvVariables } from "~/helpers/utils/environments"
@@ -23,6 +24,7 @@ export function useGRPCRequest(document: Ref<HoppGRPCDocument>) {
   const isLoading = ref(false)
   let cancelCurrent: (() => Promise<void>) | null = null
   let parseSequence = 0
+  let invocationSequence = 0
 
   watch(
     () => document.value.request.protoFiles,
@@ -79,6 +81,8 @@ export function useGRPCRequest(document: Ref<HoppGRPCDocument>) {
   )
 
   const send = async () => {
+    if (isLoading.value) return
+
     const method = selectedMethod.value
     if (!method) {
       document.value.error = "Select a service and method first"
@@ -90,10 +94,7 @@ export function useGRPCRequest(document: Ref<HoppGRPCDocument>) {
       return
     }
     const activeInterceptor = interceptor.current.value
-    if (
-      !activeInterceptor?.capabilities.content.has("binary") ||
-      !activeInterceptor.capabilities.advanced.has("http2")
-    ) {
+    if (!supportsGRPC(activeInterceptor?.capabilities)) {
       document.value.error =
         "Native gRPC requires an interceptor with binary HTTP/2 support. Use the Desktop app's native interceptor."
       return
@@ -102,6 +103,7 @@ export function useGRPCRequest(document: Ref<HoppGRPCDocument>) {
     document.value.error = null
     document.value.response = null
     isLoading.value = true
+    const invocation = ++invocationSequence
     try {
       const env = getCombinedEnvVariables()
       const variables = [...env.temp, ...env.selected, ...env.global]
@@ -123,6 +125,8 @@ export function useGRPCRequest(document: Ref<HoppGRPCDocument>) {
       })
       cancelCurrent = execution.cancel
       const result = await execution.response
+      if (invocation !== invocationSequence) return
+
       if (E.isRight(result)) document.value.response = result.right
       else if (result.left !== "cancellation") {
         document.value.error =
@@ -131,11 +135,15 @@ export function useGRPCRequest(document: Ref<HoppGRPCDocument>) {
             : result.left.humanMessage.description((key) => key)
       }
     } catch (error) {
-      document.value.error =
-        error instanceof Error ? error.message : String(error)
+      if (invocation === invocationSequence) {
+        document.value.error =
+          error instanceof Error ? error.message : String(error)
+      }
     } finally {
-      cancelCurrent = null
-      isLoading.value = false
+      if (invocation === invocationSequence) {
+        cancelCurrent = null
+        isLoading.value = false
+      }
     }
   }
 

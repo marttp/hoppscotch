@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, useTemplateRef } from "vue"
+import { computed, reactive, shallowRef, useTemplateRef } from "vue"
 import IconWrapText from "~icons/lucide/wrap-text"
 import { useCodemirror } from "~/composables/codemirror"
 import { useI18n } from "~/composables/i18n"
@@ -20,6 +20,7 @@ const props = defineProps<{
 const t = useI18n()
 const responseEditor = useTemplateRef<HTMLDivElement>("responseEditor")
 const wrapLines = useNestedSetting("WRAP_LINES", "httpResponseBody")
+const activeTab = shallowRef<"body" | "metadata" | "trailers">("body")
 
 const responseBody = computed(() => props.response?.message ?? "")
 
@@ -93,10 +94,21 @@ const { downloadIcon, downloadResponse } = useDownloadResponse(
       <div
         class="flex flex-shrink-0 items-center justify-between border-b border-dividerLight bg-primary pl-4"
       >
-        <label class="truncate font-semibold text-secondaryLight">
-          {{ t("response.body") }}
-        </label>
-        <div class="flex items-center">
+        <div class="flex self-stretch">
+          <button
+            v-for="tab in ['body', 'metadata', 'trailers'] as const"
+            :key="tab"
+            type="button"
+            class="px-4 text-secondaryLight"
+            :class="
+              activeTab === tab && 'border-b-2 border-accent text-secondaryDark'
+            "
+            @click="activeTab = tab"
+          >
+            {{ t(`response.${tab}`) }}
+          </button>
+        </div>
+        <div v-if="activeTab === 'body'" class="flex items-center">
           <HoppButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('state.linewrap')"
@@ -120,8 +132,41 @@ const { downloadIcon, downloadResponse } = useDownloadResponse(
           />
         </div>
       </div>
-      <div class="relative min-h-64 flex-1 overflow-auto bg-primary">
+      <div
+        v-show="activeTab === 'body'"
+        class="relative min-h-64 flex-1 overflow-auto bg-primary"
+      >
         <div ref="responseEditor" class="absolute inset-0"></div>
+      </div>
+      <div
+        v-if="activeTab !== 'body'"
+        class="flex min-h-64 flex-1 flex-col overflow-auto bg-primary"
+      >
+        <div
+          v-for="entry in activeTab === 'metadata'
+            ? response.metadata
+            : response.trailers"
+          :key="`${entry.key}:${entry.value}`"
+          class="grid grid-cols-2 border-b border-dividerLight px-4 py-2"
+        >
+          <span class="break-all font-semibold text-secondaryDark">
+            {{ entry.key }}
+          </span>
+          <span class="break-all text-secondaryLight">{{ entry.value }}</span>
+        </div>
+        <div
+          v-if="
+            (activeTab === 'metadata' ? response.metadata : response.trailers)
+              .length === 0
+          "
+          class="flex flex-1 items-center justify-center text-secondaryLight"
+        >
+          {{
+            activeTab === "metadata"
+              ? t("response.no_metadata")
+              : t("response.no_trailers")
+          }}
+        </div>
       </div>
     </div>
   </div>

@@ -93,7 +93,16 @@ impl<'a> CurlRequest<'a> {
         }
         */
 
-        let http_version = curl_version_for_url(self.request.version, &self.request.url);
+        let is_grpc = self.request.headers.as_ref().is_some_and(|headers| {
+            headers.iter().any(|(key, value)| {
+                key.eq_ignore_ascii_case("content-type")
+                    && value
+                        .trim()
+                        .to_ascii_lowercase()
+                        .starts_with("application/grpc")
+            })
+        });
+        let http_version = curl_version_for_url(self.request.version, &self.request.url, is_grpc);
 
         self.handle.http_version(http_version).map_err(|e| {
             tracing::error!(error = %e, "Failed to set HTTP version");

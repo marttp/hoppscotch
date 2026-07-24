@@ -32,6 +32,7 @@ import IconLink2 from "~icons/lucide/link-2"
 import IconGraphql from "~icons/hopp/graphql"
 import IconGlobe from "~icons/lucide/globe"
 import IconSettings from "~icons/lucide/settings"
+import IconBoxes from "~icons/lucide/boxes"
 import { useSetting } from "@composables/settings"
 import { useI18n } from "@composables/i18n"
 
@@ -53,6 +54,12 @@ const primaryNavigation = [
     target: "/graphql",
     svg: IconGraphql,
     title: "navigation.graphql",
+    exact: false,
+  },
+  {
+    target: "/grpc",
+    svg: IconBoxes,
+    title: "navigation.grpc",
     exact: false,
   },
   {

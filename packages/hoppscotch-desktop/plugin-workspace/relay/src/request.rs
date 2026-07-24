@@ -8,7 +8,7 @@ use crate::{
     header::HeadersBuilder,
     interop::{ApiKeyLocation, AuthType, Request},
     security::SecurityHandler,
-    util::ToCurlVersion,
+    util::curl_version_for_url,
 };
 
 pub(crate) struct CurlRequest<'a> {
@@ -93,15 +93,15 @@ impl<'a> CurlRequest<'a> {
         }
         */
 
-        self.handle
-            .http_version(self.request.version.to_curl_version())
-            .map_err(|e| {
-                tracing::error!(error = %e, "Failed to set HTTP version");
-                RelayError::Network {
-                    message: "Failed to set HTTP version".into(),
-                    cause: Some(e.to_string()),
-                }
-            })?;
+        let http_version = curl_version_for_url(self.request.version, &self.request.url);
+
+        self.handle.http_version(http_version).map_err(|e| {
+            tracing::error!(error = %e, "Failed to set HTTP version");
+            RelayError::Network {
+                message: "Failed to set HTTP version".into(),
+                cause: Some(e.to_string()),
+            }
+        })?;
 
         // NOTE: `""` corresponds to accept all,
         // see: https://curl.se/libcurl/c/CURLOPT_ACCEPT_ENCODING.html

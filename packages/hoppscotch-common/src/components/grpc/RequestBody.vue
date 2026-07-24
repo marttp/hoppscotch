@@ -2,14 +2,13 @@
 import * as TO from "fp-ts/TaskOption"
 import { pipe } from "fp-ts/function"
 import { refAutoReset } from "@vueuse/core"
-import { reactive, useTemplateRef } from "vue"
+import { reactive, ref, useTemplateRef, watch } from "vue"
 import IconCheck from "~icons/lucide/check"
 import IconFilePlus from "~icons/lucide/file-plus"
 import IconInfo from "~icons/lucide/info"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconWand2 from "~icons/lucide/wand-2"
 import { useCodemirror } from "~/composables/codemirror"
-import { useGRPCRequestBodyBuffer } from "~/composables/useGRPCRequestBodyBuffer"
 import { useI18n } from "~/composables/i18n"
 import { useToast } from "~/composables/toast"
 import { prettifyJSONC } from "~/helpers/editor/linting/jsoncPretty"
@@ -25,11 +24,21 @@ const prettifyIcon = refAutoReset<
   typeof IconWand2 | typeof IconCheck | typeof IconInfo
 >(IconWand2, 1000)
 
-const { editorValue, flushEditorValue } = useGRPCRequestBodyBuffer(body)
+const codemirrorValue = ref<string | undefined>(body.value)
+
+watch(body, (newVal) => {
+  codemirrorValue.value = newVal
+})
+
+watch(codemirrorValue, (updatedValue) => {
+  if (updatedValue !== undefined && updatedValue !== body.value) {
+    body.value = updatedValue
+  }
+})
 
 useCodemirror(
   bodyEditor,
-  editorValue,
+  codemirrorValue,
   reactive({
     extendedEditorConfig: {
       mode: "application/json",
@@ -46,8 +55,7 @@ useCodemirror(
 
 const prettifyBody = () => {
   try {
-    editorValue.value = prettifyJSONC(editorValue.value ?? "")
-    flushEditorValue()
+    codemirrorValue.value = prettifyJSONC(codemirrorValue.value ?? "")
     prettifyIcon.value = IconCheck
   } catch (cause) {
     console.error(cause)
@@ -57,8 +65,7 @@ const prettifyBody = () => {
 }
 
 const clearBody = () => {
-  editorValue.value = ""
-  flushEditorValue()
+  codemirrorValue.value = ""
 }
 
 const importBody = async (event: Event) => {
@@ -72,8 +79,7 @@ const importBody = async (event: Event) => {
     TO.matchW(
       () => toast.error(`${t("action.choose_file")}`),
       (content) => {
-        editorValue.value = content
-        flushEditorValue()
+        codemirrorValue.value = content
         toast.success(`${t("state.file_imported")}`)
       }
     )
@@ -123,7 +129,6 @@ const importBody = async (event: Event) => {
       ref="bodyEditor"
       class="h-full min-h-64 flex-1 overflow-auto bg-primary"
       aria-label="Request JSON"
-      @focusout="flushEditorValue"
     ></div>
   </div>
 </template>

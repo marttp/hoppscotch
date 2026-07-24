@@ -2295,5 +2295,9 @@
       "delete_success": "Mock server byl úspěšně smazán",
       "delete_error": "Smazání mock serveru se nezdařilo"
     }
+  },
+  "grpc": {
+    "unsupported_title": "gRPC není na aktuální platformě dostupné",
+    "unsupported_description": "Použijte interceptor s podporou binárního HTTP/2, například nativní interceptor desktopové aplikace."
   }
 }

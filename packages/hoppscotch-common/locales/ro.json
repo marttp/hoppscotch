@@ -1102,5 +1102,9 @@
     "not_found": "Codul scurt nu a fost găsit",
     "short_code": "Cod scurt",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC nu este disponibil pe platforma curentă",
+    "unsupported_description": "Folosiți un interceptor cu suport HTTP/2 binar, precum interceptorul nativ al aplicației desktop."
   }
 }

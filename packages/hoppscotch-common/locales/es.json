@@ -2326,5 +2326,9 @@
       "delete_success": "Servidor mock eliminado exitosamente",
       "delete_error": "No se pudo eliminar el servidor mock"
     }
+  },
+  "grpc": {
+    "unsupported_title": "gRPC no está disponible en la plataforma actual",
+    "unsupported_description": "Utiliza un interceptor compatible con HTTP/2 binario, como el interceptor nativo de la aplicación de escritorio."
   }
 }

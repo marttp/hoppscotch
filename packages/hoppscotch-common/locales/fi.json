@@ -2374,5 +2374,9 @@
       "delete_success": "Mock-palvelin poistettu onnistuneesti",
       "delete_error": "Mock-palvelimen poisto epäonnistui"
     }
+  },
+  "grpc": {
+    "unsupported_title": "gRPC ei ole käytettävissä nykyisellä alustalla",
+    "unsupported_description": "Käytä binääristä HTTP/2:ta tukevaa välittäjää, kuten työpöytäsovelluksen natiivia välittäjää."
   }
 }

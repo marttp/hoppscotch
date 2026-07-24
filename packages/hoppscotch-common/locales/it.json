@@ -1102,5 +1102,9 @@
     "not_found": "Shortcode not found",
     "short_code": "Short code",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC non è disponibile sulla piattaforma attuale",
+    "unsupported_description": "Utilizza un interceptor con supporto HTTP/2 binario, come l'interceptor nativo dell'app desktop."
   }
 }

@@ -1102,5 +1102,9 @@
     "not_found": "Το Shortcode δεν βρέθηκε",
     "short_code": "Short code",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "Το gRPC δεν είναι διαθέσιμο στην τρέχουσα πλατφόρμα",
+    "unsupported_description": "Χρησιμοποιήστε έναν interceptor με υποστήριξη δυαδικού HTTP/2, όπως τον εγγενή interceptor της εφαρμογής για υπολογιστή."
   }
 }

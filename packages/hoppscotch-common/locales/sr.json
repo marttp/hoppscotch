@@ -1102,5 +1102,9 @@
     "not_found": "Shortcode not found",
     "short_code": "Short code",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC није доступан на тренутној платформи",
+    "unsupported_description": "Користите пресретач са подршком за бинарни HTTP/2, као што је изворни пресретач десктоп апликације."
   }
 }

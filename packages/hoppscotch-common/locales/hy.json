@@ -2295,5 +2295,9 @@
             "delete_success": "Mock server-ը հաջողությամբ ջնջվեց",
             "delete_error": "Չհաջողվեց ջնջել mock server-ը"
         }
+    },
+    "grpc": {
+        "unsupported_title": "gRPC-ն հասանելի չէ ընթացիկ հարթակում",
+        "unsupported_description": "Օգտագործեք բինար HTTP/2 աջակցող interceptor, օրինակ՝ աշխատասեղանի հավելվածի ներկառուցված interceptor-ը։"
     }
 }

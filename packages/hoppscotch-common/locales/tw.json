@@ -1118,5 +1118,9 @@
     "not_found": "找不到快捷碼",
     "short_code": "快捷碼",
     "url": "網址"
+  },
+  "grpc": {
+    "unsupported_title": "目前的平台不支援 gRPC",
+    "unsupported_description": "請使用支援二進位 HTTP/2 的攔截器，例如桌面應用程式的原生攔截器。"
   }
 }

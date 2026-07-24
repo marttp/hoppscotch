@@ -2357,5 +2357,9 @@
       "delete_success": "Хуурамч серверийг амжилттай устгалаа",
       "delete_error": "Хуурамч серверийг устгаж чадсангүй"
     }
+  },
+  "grpc": {
+    "unsupported_title": "gRPC одоогийн платформ дээр ашиглах боломжгүй",
+    "unsupported_description": "Desktop аппын үндсэн interceptor зэрэг хоёртын HTTP/2 дэмждэг interceptor ашиглана уу."
   }
 }

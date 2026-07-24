@@ -1102,5 +1102,9 @@
     "not_found": "ショートコードが見つかりません",
     "short_code": "ショートコード",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "現在のプラットフォームでは gRPC を利用できません",
+    "unsupported_description": "デスクトップアプリのネイティブインターセプターなど、バイナリ HTTP/2 をサポートするインターセプターを使用してください。"
   }
 }

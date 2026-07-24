@@ -1102,5 +1102,9 @@
     "not_found": "A rövid kód nem található",
     "short_code": "Rövid kód",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "A gRPC nem érhető el a jelenlegi platformon",
+    "unsupported_description": "Használjon bináris HTTP/2-t támogató interceptort, például az asztali alkalmazás natív interceptorát."
   }
 }

@@ -2357,5 +2357,9 @@
       "delete_success": "Mock 服务删除成功",
       "delete_error": "删除 Mock 服务失败"
     }
+  },
+  "grpc": {
+    "unsupported_title": "当前平台不支持 gRPC",
+    "unsupported_description": "请使用支持二进制 HTTP/2 的拦截器，例如桌面应用的原生拦截器。"
   }
 }

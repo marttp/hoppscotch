@@ -1092,5 +1092,9 @@
   "ai_experiments": {
     "generate_request_name": "Generér anmodningsnavn ved hjælp af AI",
     "generate_or_modify_request_body": "Generér eller modificér anmodning meddelelse"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC er ikke tilgængelig på den aktuelle platform",
+    "unsupported_description": "Brug en interceptor med understøttelse af binær HTTP/2, f.eks. desktopappens indbyggede interceptor."
   }
 }

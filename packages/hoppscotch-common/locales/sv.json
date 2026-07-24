@@ -1102,5 +1102,9 @@
     "not_found": "Shortcode not found",
     "short_code": "Short code",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC är inte tillgängligt på den aktuella plattformen",
+    "unsupported_description": "Använd en interceptor med stöd för binär HTTP/2, till exempel skrivbordsappens inbyggda interceptor."
   }
 }

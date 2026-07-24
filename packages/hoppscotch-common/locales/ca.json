@@ -1102,5 +1102,9 @@
     "not_found": "No s'ha trobat el shortcode",
     "short_code": "Short code",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC no està disponible a la plataforma actual",
+    "unsupported_description": "Utilitzeu un interceptor amb compatibilitat amb HTTP/2 binari, com ara l'interceptor natiu de l'aplicació d'escriptori."
   }
 }

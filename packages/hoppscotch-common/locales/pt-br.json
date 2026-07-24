@@ -1269,5 +1269,9 @@
     "generate_or_modify_post_request_script_input_placeholder": "Insira um prompt para gerar ou modificar o script de teste",
     "modify_post_request_script_error": "Falha ao modificar o script de teste",
     "modify_prerequest_error": "Falha ao modificar o script de pré-requisição"
+  },
+  "grpc": {
+    "unsupported_title": "O gRPC não está disponível na plataforma atual",
+    "unsupported_description": "Use um interceptor compatível com HTTP/2 binário, como o interceptor nativo do aplicativo para desktop."
   }
 }

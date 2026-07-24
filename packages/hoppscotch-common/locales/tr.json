@@ -2326,5 +2326,9 @@
       "delete_success": "Mock sunucu başarıyla silindi",
       "delete_error": "Mock sunucu silinemedi"
     }
+  },
+  "grpc": {
+    "unsupported_title": "gRPC mevcut platformda kullanılamıyor",
+    "unsupported_description": "Masaüstü uygulamasının yerel interceptor'ı gibi ikili HTTP/2 desteğine sahip bir interceptor kullanın."
   }
 }

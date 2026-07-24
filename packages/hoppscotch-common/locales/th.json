@@ -2374,5 +2374,9 @@
       "delete_success": "ลบ Mock Server สำเร็จ",
       "delete_error": "ไม่สามารถลบ Mock Server ได้"
     }
+  },
+  "grpc": {
+    "unsupported_title": "gRPC ไม่พร้อมใช้งานบนแพลตฟอร์มปัจจุบัน",
+    "unsupported_description": "ใช้ตัวดักจับที่รองรับ HTTP/2 แบบไบนารี เช่น ตัวดักจับแบบเนทีฟของแอปเดสก์ท็อป"
   }
 }

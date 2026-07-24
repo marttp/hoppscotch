@@ -1102,5 +1102,9 @@
     "not_found": "Shortcode tidak ditemukan",
     "short_code": "Short code",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC tidak tersedia di platform saat ini",
+    "unsupported_description": "Gunakan interceptor yang mendukung HTTP/2 biner, seperti interceptor native aplikasi desktop."
   }
 }

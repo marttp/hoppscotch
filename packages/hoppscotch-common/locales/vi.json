@@ -1102,5 +1102,9 @@
     "not_found": "Không tìm thấy Shortcode",
     "short_code": "Short code",
     "url": "URL"
+  },
+  "grpc": {
+    "unsupported_title": "gRPC không khả dụng trên nền tảng hiện tại",
+    "unsupported_description": "Hãy dùng một interceptor hỗ trợ HTTP/2 nhị phân, chẳng hạn interceptor gốc của ứng dụng máy tính."
   }
 }

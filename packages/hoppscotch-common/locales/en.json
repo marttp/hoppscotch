@@ -837,6 +837,10 @@
     "url_placeholder": "Enter a GraphQL endpoint URL",
     "query": "Query"
   },
+  "grpc": {
+    "unsupported_description": "Use an interceptor with binary HTTP/2 support, such as the Desktop native interceptor.",
+    "unsupported_title": "gRPC is not available with the current platform"
+  },
   "graphql_collections": {
     "title": "GraphQL Collections"
   },
@@ -1252,10 +1256,14 @@
     "html": "HTML",
     "image": "Image",
     "json": "JSON",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
     "pdf": "PDF",
     "please_save_request": "Save the request to create example",
     "preview_html": "Preview HTML",
     "raw": "Raw",
+    "trailers": "Trailers",
     "renamed": "Response renamed",
     "same_name_inspector_warning": "Response name already exists for this request, if saved it will overwrite the existing response",
     "size": "Size",

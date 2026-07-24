@@ -3,14 +3,24 @@ import { getDefaultGRPCRequest } from "@hoppscotch/data"
 import { usePageHead } from "@composables/head"
 import { useService } from "dioc/vue"
 import { computed, ref } from "vue"
+import { supportsGRPC } from "~/helpers/grpc"
+import { useI18n } from "~/composables/i18n"
+import { KernelInterceptorService } from "~/services/kernel-interceptor.service"
 import { GRPCTabService } from "~/services/tab/grpc"
 
+const t = useI18n()
 const tabs = useService(GRPCTabService)
+const interceptorService = useService(KernelInterceptorService)
 const activeTabs = tabs.getActiveTabs()
 const currentTabID = computed(() => tabs.currentTabID.value)
 const confirmingCloseForTabID = ref<string | null>(null)
+const grpcAvailable = computed(() =>
+  interceptorService.available.value.some((interceptor) =>
+    supportsGRPC(interceptor.capabilities)
+  )
+)
 
-usePageHead({ title: "gRPC" })
+usePageHead({ title: computed(() => t("navigation.grpc")) })
 
 const addNewTab = () => {
   tabs.createNewTab({
@@ -35,8 +45,13 @@ const confirmClose = () => {
   <div class="flex min-w-0 flex-1">
     <AppPaneLayout layout-id="grpc">
       <template #primary>
+        <HoppSmartPlaceholder
+          v-if="!grpcAvailable"
+          :heading="t('grpc.unsupported_title')"
+          :text="t('grpc.unsupported_description')"
+        />
         <HoppSmartWindows
-          v-if="currentTabID"
+          v-else-if="currentTabID"
           id="grpc_windows"
           :model-value="currentTabID"
           @update:model-value="tabs.setActiveTab"
@@ -65,8 +80,8 @@ const confirmClose = () => {
     </AppPaneLayout>
     <HoppSmartConfirmModal
       :show="confirmingCloseForTabID !== null"
-      confirm="Close unsaved tab"
-      title="This gRPC request has unsaved changes"
+      :confirm="t('modal.close_unsaved_tab')"
+      :title="t('confirm.close_unsaved_tab')"
       @hide-modal="confirmingCloseForTabID = null"
       @resolve="confirmClose"
     />

@@ -12,8 +12,16 @@ describe("gRPC request body JSON", () => {
   })
 
   test("preserves unicode whitespace inside JSON strings", () => {
-    const body = '{"title":"A\u00a0B"}'
+    const body = '{"title":"A\u00a0B\u2028C\u2029D"}'
 
     expect(normalizeGRPCRequestBodyWhitespace(body)).toBe(body)
+  })
+
+  test("normalizes unicode line and paragraph separators outside strings", () => {
+    const body = '{\u2028"title": "",\u2029"author": ""\u2028}'
+
+    expect(normalizeGRPCRequestBodyWhitespace(body)).toBe(
+      '{ "title": "", "author": "" }'
+    )
   })
 })

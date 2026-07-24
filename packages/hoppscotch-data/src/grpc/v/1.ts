@@ -2,8 +2,8 @@ import { defineVersion } from "verzod"
 import { z } from "zod"
 
 export const GRPCProtoFile = z.object({
-  name: z.string(),
-  content: z.string(),
+  name: z.string().catch(""),
+  content: z.string().catch(""),
 })
 
 export type GRPCProtoFile = z.infer<typeof GRPCProtoFile>

@@ -50,6 +50,7 @@ import {
 } from "~/newstore/settings"
 import { SecretEnvironmentService } from "~/services/secret-environment.service"
 import { GQLTabService } from "~/services/tab/graphql"
+import { GRPCTabService } from "~/services/tab/grpc"
 import { RESTTabService } from "~/services/tab/rest"
 import {
   PersistenceService,
@@ -162,11 +163,13 @@ const setStoreItem = async <T>(key: string, value: T) => {
 
 const bindPersistenceService = ({
   mockGQLTabService = false,
+  mockGRPCTabService = false,
   mockRESTTabService = false,
   mockSecretEnvironmentsService = false,
   mock = {},
 }: {
   mockGQLTabService?: boolean
+  mockGRPCTabService?: boolean
   mockRESTTabService?: boolean
   mockSecretEnvironmentsService?: boolean
   mock?: Record<string, unknown>
@@ -175,6 +178,10 @@ const bindPersistenceService = ({
 
   if (mockGQLTabService) {
     container.bindMock(GQLTabService, mock)
+  }
+
+  if (mockGRPCTabService) {
+    container.bindMock(GRPCTabService, mock)
   }
 
   if (mockRESTTabService) {
@@ -1787,6 +1794,35 @@ describe("PersistenceService", () => {
           expect.any(Function),
           { debounce: 500, deep: true }
         )
+      })
+    })
+
+    describe("setup gRPC tabs persistence", () => {
+      const grpcTabStateKey = `${STORE_NAMESPACE}:${STORE_KEYS.GRPC_TABS}`
+
+      it("backs up invalid state without loading it", async () => {
+        const grpcTabState = {
+          lastActiveTabID: "tab-1",
+          orderedDocs: "not-an-array",
+        }
+        const loadTabsFromPersistedState = vi.fn()
+        await setStoreItem(grpcTabStateKey, grpcTabState)
+
+        const setItemSpy = spyOnSetItem()
+
+        await invokeSetupLocalPersistence({
+          mockGRPCTabService: true,
+          mock: {
+            loadTabsFromPersistedState,
+            persistableTabState: {},
+          },
+        })
+
+        expect(setItemSpy).toHaveBeenCalledWith(
+          `${grpcTabStateKey}-backup`,
+          expect.stringContaining(JSON.stringify(grpcTabState))
+        )
+        expect(loadTabsFromPersistedState).not.toHaveBeenCalled()
       })
     })
 

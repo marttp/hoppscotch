@@ -53,20 +53,45 @@ describe("gRPC proto parsing and codec", () => {
     const schema = await parseGRPCProtoFiles([
       {
         name: "services/echo.proto",
-        content: SERVICE_PROTO.replace(
-          'import "messages.proto";',
-          'import "../types/messages.proto";'
-        ),
+        content: SERVICE_PROTO,
       },
-      { name: "types/messages.proto", content: MESSAGES_PROTO },
+      { name: "services/messages.proto", content: MESSAGES_PROTO },
       {
-        name: "legacy/messages.proto",
+        name: "messages.proto",
         content: MESSAGES_PROTO.replaceAll("Echo", "Legacy"),
       },
     ])
 
     const method = findGRPCMethod(schema, "echo.v1.EchoService", "Echo")
     expect(method?.requestType.name).toBe("EchoRequest")
+  })
+
+  test("uses canonical protobuf JSON field names", async () => {
+    const schema = await parseGRPCProtoFiles([
+      {
+        name: "camel-case.proto",
+        content: `
+          syntax = "proto3";
+          package users.v1;
+          message UserRequest { string user_name = 1; }
+          message UserResponse { string user_name = 1; }
+          service UserService {
+            rpc GetUser(UserRequest) returns (UserResponse);
+          }
+        `,
+      },
+    ])
+    const method = schema.services[0].methods[0]
+
+    expect(JSON.parse(getDefaultGRPCRequestBody(method.requestType))).toEqual({
+      userName: "",
+    })
+
+    const encoded = encodeGRPCRequestBody(
+      method.requestType,
+      '{"userName":"Ada"}'
+    )
+    expect(method.requestType.decode(encoded).userName).toBe("Ada")
   })
 
   test("encodes JSON and decodes protobuf with JSON-safe int64 values", async () => {

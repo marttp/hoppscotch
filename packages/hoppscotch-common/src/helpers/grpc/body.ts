@@ -1,5 +1,5 @@
 const isUnicodeJSONWhitespace = (character: string): boolean =>
-  character === "\uFEFF" || /\p{Zs}/u.test(character)
+  character === "\uFEFF" || /\p{Z}/u.test(character)
 
 export const normalizeGRPCRequestBodyWhitespace = (body: string): string => {
   let normalized = ""

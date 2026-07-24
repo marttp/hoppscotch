@@ -73,12 +73,12 @@ export async function parseGRPCProtoFiles(
 
   root.resolvePath = (origin, target) => {
     const normalizedTarget = normalizeGRPCProtoPath(target)
-    if (files.has(normalizedTarget)) return normalizedTarget
-
     const relativeTarget = normalizeGRPCProtoPath(
       `${dirname(origin)}/${target}`
     )
     if (files.has(relativeTarget)) return relativeTarget
+
+    if (files.has(normalizedTarget)) return normalizedTarget
 
     const suffixMatch = [...files.keys()].find((fileName) =>
       fileName.endsWith(`/${normalizedTarget}`)
@@ -97,7 +97,7 @@ export async function parseGRPCProtoFiles(
     callback(null, content)
   }
 
-  await root.load([...files.keys()], { keepCase: true })
+  await root.load([...files.keys()])
   root.resolveAll()
 
   const services: GRPCServiceDefinition[] = []

@@ -1186,7 +1186,6 @@ export class PersistenceService extends Service {
             `Failed parsing persisted GRPC_TABS:`,
             JSON.stringify(loadResult.right)
           )
-          this.grpcTabService.loadTabsFromPersistedState(loadResult.right)
         }
       }
     } catch (_e) {

@@ -537,7 +537,8 @@
     "profile": "Profil",
     "realtime": "Realtid",
     "rest": "REST",
-    "settings": "Indstillinger"
+    "settings": "Indstillinger",
+    "grpc": "gRPC"
   },
   "preRequest": {
     "javascript_code": "JavaScript-kode",
@@ -634,7 +635,11 @@
     "title": "Svar",
     "video": "Video",
     "waiting_for_connection": "venter på forbindelse",
-    "xml": "XML"
+    "xml": "XML",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
+    "trailers": "Trailers"
   },
   "settings": {
     "accent_color": "Accentfarve",
@@ -1095,6 +1100,11 @@
   },
   "grpc": {
     "unsupported_title": "gRPC er ikke tilgængelig på den aktuelle platform",
-    "unsupported_description": "Brug en interceptor med understøttelse af binær HTTP/2, f.eks. desktopappens indbyggede interceptor."
+    "unsupported_description": "Brug en interceptor med understøttelse af binær HTTP/2, f.eks. desktopappens indbyggede interceptor.",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   }
 }

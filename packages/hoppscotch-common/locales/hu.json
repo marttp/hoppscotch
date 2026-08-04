@@ -540,7 +540,8 @@
     "profile": "Profil",
     "realtime": "Valós idő",
     "rest": "REST",
-    "settings": "Beállítások"
+    "settings": "Beállítások",
+    "grpc": "gRPC"
   },
   "preRequest": {
     "javascript_code": "JavaScript kód",
@@ -637,7 +638,11 @@
     "title": "Válasz",
     "video": "Videó",
     "waiting_for_connection": "várakozás kapcsolódásra",
-    "xml": "XML"
+    "xml": "XML",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
+    "trailers": "Trailers"
   },
   "settings": {
     "accent_color": "Kiemelőszín",
@@ -1105,6 +1110,11 @@
   },
   "grpc": {
     "unsupported_title": "A gRPC nem érhető el a jelenlegi platformon",
-    "unsupported_description": "Használjon bináris HTTP/2-t támogató interceptort, például az asztali alkalmazás natív interceptorát."
+    "unsupported_description": "Használjon bináris HTTP/2-t támogató interceptort, például az asztali alkalmazás natív interceptorát.",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   }
 }

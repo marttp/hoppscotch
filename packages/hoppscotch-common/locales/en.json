@@ -839,7 +839,12 @@
   },
   "grpc": {
     "unsupported_description": "Use an interceptor with binary HTTP/2 support, such as the Desktop native interceptor.",
-    "unsupported_title": "gRPC is not available with the current platform"
+    "unsupported_title": "gRPC is not available with the current platform",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   },
   "graphql_collections": {
     "title": "GraphQL Collections"

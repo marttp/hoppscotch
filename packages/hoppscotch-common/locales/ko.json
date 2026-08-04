@@ -540,7 +540,8 @@
     "profile": "프로필",
     "realtime": "실시간",
     "rest": "REST",
-    "settings": "설정"
+    "settings": "설정",
+    "grpc": "gRPC"
   },
   "preRequest": {
     "javascript_code": "자바스크립트 코드",
@@ -637,7 +638,11 @@
     "title": "제목",
     "video": "Video",
     "waiting_for_connection": "연결 대기 중",
-    "xml": "XML"
+    "xml": "XML",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
+    "trailers": "Trailers"
   },
   "settings": {
     "accent_color": "강조색",
@@ -1105,6 +1110,11 @@
   },
   "grpc": {
     "unsupported_title": "현재 플랫폼에서는 gRPC를 사용할 수 없습니다",
-    "unsupported_description": "데스크톱 앱의 네이티브 인터셉터와 같이 바이너리 HTTP/2를 지원하는 인터셉터를 사용하세요."
+    "unsupported_description": "데스크톱 앱의 네이티브 인터셉터와 같이 바이너리 HTTP/2를 지원하는 인터셉터를 사용하세요.",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   }
 }

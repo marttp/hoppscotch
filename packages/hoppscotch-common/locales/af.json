@@ -540,7 +540,8 @@
     "profile": "Profile",
     "realtime": "Ware tyd",
     "rest": "REST",
-    "settings": "Instellings"
+    "settings": "Instellings",
+    "grpc": "gRPC"
   },
   "preRequest": {
     "javascript_code": "JavaScript -kode",
@@ -637,7 +638,11 @@
     "title": "Reaksie",
     "video": "Video",
     "waiting_for_connection": "wag vir verbinding",
-    "xml": "XML"
+    "xml": "XML",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
+    "trailers": "Trailers"
   },
   "settings": {
     "accent_color": "Aksent kleur",
@@ -1105,6 +1110,11 @@
   },
   "grpc": {
     "unsupported_title": "gRPC is nie op die huidige platform beskikbaar nie",
-    "unsupported_description": "Gebruik 'n onderskepper met binêre HTTP/2-ondersteuning, soos die ingeboude Desktop-onderskepper."
+    "unsupported_description": "Gebruik 'n onderskepper met binêre HTTP/2-ondersteuning, soos die ingeboude Desktop-onderskepper.",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   }
 }

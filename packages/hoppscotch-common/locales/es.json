@@ -1077,7 +1077,8 @@
     "mock_servers": "Servidores mock",
     "settings": "Ajustes",
     "goto_app": "Ir a la aplicación",
-    "authentication": "Autenticación"
+    "authentication": "Autenticación",
+    "grpc": "gRPC"
   },
   "mock_server": {
     "confirm_delete_log": "¿Estás seguro de que deseas eliminar este registro?",
@@ -1254,7 +1255,11 @@
     "generate_data_schema": "Generar esquema de datos",
     "data_schema": "Esquema de datos",
     "saved": "Respuesta guardada",
-    "invalid_name": "Por favor proporciona un nombre para la respuesta"
+    "invalid_name": "Por favor proporciona un nombre para la respuesta",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
+    "trailers": "Trailers"
   },
   "settings": {
     "accent_color": "Color de acentuación",
@@ -2329,6 +2334,11 @@
   },
   "grpc": {
     "unsupported_title": "gRPC no está disponible en la plataforma actual",
-    "unsupported_description": "Utiliza un interceptor compatible con HTTP/2 binario, como el interceptor nativo de la aplicación de escritorio."
+    "unsupported_description": "Utiliza un interceptor compatible con HTTP/2 binario, como el interceptor nativo de la aplicación de escritorio.",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   }
 }

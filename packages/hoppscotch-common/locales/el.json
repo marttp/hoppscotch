@@ -540,7 +540,8 @@
     "profile": "Profile",
     "realtime": "Πραγματικός χρόνος",
     "rest": "REST",
-    "settings": "Ρυθμίσεις"
+    "settings": "Ρυθμίσεις",
+    "grpc": "gRPC"
   },
   "preRequest": {
     "javascript_code": "Κώδικας JavaScript",
@@ -637,7 +638,11 @@
     "title": "Απάντηση",
     "video": "Video",
     "waiting_for_connection": "περιμένοντας τη σύνδεση",
-    "xml": "XML"
+    "xml": "XML",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
+    "trailers": "Trailers"
   },
   "settings": {
     "accent_color": "Χρώμα προφοράς",
@@ -1105,6 +1110,11 @@
   },
   "grpc": {
     "unsupported_title": "Το gRPC δεν είναι διαθέσιμο στην τρέχουσα πλατφόρμα",
-    "unsupported_description": "Χρησιμοποιήστε έναν interceptor με υποστήριξη δυαδικού HTTP/2, όπως τον εγγενή interceptor της εφαρμογής για υπολογιστή."
+    "unsupported_description": "Χρησιμοποιήστε έναν interceptor με υποστήριξη δυαδικού HTTP/2, όπως τον εγγενή interceptor της εφαρμογής για υπολογιστή.",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   }
 }

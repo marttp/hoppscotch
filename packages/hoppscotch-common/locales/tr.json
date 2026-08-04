@@ -1077,7 +1077,8 @@
     "mock_servers": "Mock Sunucular",
     "settings": "Ayarlar",
     "goto_app": "Uygulamaya Git",
-    "authentication": "Kimlik Doğrulama"
+    "authentication": "Kimlik Doğrulama",
+    "grpc": "gRPC"
   },
   "mock_server": {
     "confirm_delete_log": "Bu günlüğü silmek istediğinizden emin misiniz?",
@@ -1254,7 +1255,11 @@
     "generate_data_schema": "Veri Şeması Oluştur",
     "data_schema": "Veri Şeması",
     "saved": "Yanıt kaydedildi",
-    "invalid_name": "Lütfen yanıt için bir ad girin"
+    "invalid_name": "Lütfen yanıt için bir ad girin",
+    "metadata": "Metadata",
+    "no_metadata": "This response does not have any metadata",
+    "no_trailers": "This response does not have any trailers",
+    "trailers": "Trailers"
   },
   "settings": {
     "accent_color": "Vurgu rengi",
@@ -2329,6 +2334,11 @@
   },
   "grpc": {
     "unsupported_title": "gRPC mevcut platformda kullanılamıyor",
-    "unsupported_description": "Masaüstü uygulamasının yerel interceptor'ı gibi ikili HTTP/2 desteğine sahip bir interceptor kullanın."
+    "unsupported_description": "Masaüstü uygulamasının yerel interceptor'ı gibi ikili HTTP/2 desteğine sahip bir interceptor kullanın.",
+    "invoke": "Invoke",
+    "server_url": "gRPC server URL",
+    "service": "Service",
+    "streaming": "streaming",
+    "url_placeholder": "http://localhost:8080"
   }
 }

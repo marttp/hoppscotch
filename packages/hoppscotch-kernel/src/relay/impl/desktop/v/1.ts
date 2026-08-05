@@ -131,9 +131,20 @@ export const implementation: VersionedAPI<RelayV1> = {
         once: () => () => {},
         off: () => {},
       }
+      let nativeExecutionStarted = false
+      let cancellationRequested = false
+      let cancellationPromise: Promise<void> | null = null
+
+      const cancelRequest = () => {
+        cancellationRequested = true
+        if (!nativeExecutionStarted) return Promise.resolve()
+
+        cancellationPromise ??= cancel(request.id)
+        return cancellationPromise
+      }
 
       const responsePromise = relayRequestToNativeAdapter(request)
-        .then((request) => {
+        .then(async (request) => {
           // SAFETY: Type assertion is safe because:
           // 1. The capabilities system prevents requests with unsupported methods from reaching this point
           // 2. Content types not supported by the plugin are filtered by capabilities
@@ -153,7 +164,10 @@ export const implementation: VersionedAPI<RelayV1> = {
             meta: request.meta,
           }
 
-          return execute(pluginRequest)
+          const response = execute(pluginRequest)
+          nativeExecutionStarted = true
+          if (cancellationRequested) await cancelRequest()
+          return response
         })
         .then((result: RequestResult): E.Either<RelayError, RelayResponse> => {
           if (result.kind === "success") {
@@ -191,9 +205,7 @@ export const implementation: VersionedAPI<RelayV1> = {
         })
 
       return {
-        cancel: async () => {
-          await cancel(request.id)
-        },
+        cancel: cancelRequest,
         emitter,
         response: responsePromise,
       }

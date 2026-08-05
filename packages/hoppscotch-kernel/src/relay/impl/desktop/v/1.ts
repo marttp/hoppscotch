@@ -18,6 +18,48 @@ import {
   type RequestResult,
 } from "@hoppscotch/plugin-relay"
 
+// Native execute and cancel use separate Tauri IPC calls. The cancel IPC can
+// reach Rust before execute registers the request, so retry that one transient
+// error for roughly half a second. All other cancellation failures remain
+// immediate.
+const CANCEL_REGISTRATION_RETRY_ATTEMPTS = 20
+const CANCEL_REGISTRATION_RETRY_DELAY_MS = 25
+
+const isRequestRegistrationPendingError = (error: unknown): boolean => {
+  const message = error instanceof Error ? error.message : String(error)
+  return message.includes("Request not found")
+}
+
+const cancelNativeRequest = async (
+  requestID: number,
+  isExecutionSettled: () => boolean
+): Promise<void> => {
+  for (
+    let attempt = 0;
+    attempt < CANCEL_REGISTRATION_RETRY_ATTEMPTS;
+    attempt++
+  ) {
+    try {
+      await cancel(requestID)
+      return
+    } catch (error) {
+      if (isRequestRegistrationPendingError(error) && isExecutionSettled()) {
+        return
+      }
+
+      const shouldRetry =
+        isRequestRegistrationPendingError(error) &&
+        attempt < CANCEL_REGISTRATION_RETRY_ATTEMPTS - 1
+
+      if (!shouldRetry) throw error
+
+      await new Promise<void>((resolve) =>
+        setTimeout(resolve, CANCEL_REGISTRATION_RETRY_DELAY_MS)
+      )
+    }
+  }
+}
+
 export const implementation: VersionedAPI<RelayV1> = {
   version: { major: 1, minor: 0, patch: 0 },
   api: {
@@ -132,6 +174,7 @@ export const implementation: VersionedAPI<RelayV1> = {
         off: () => {},
       }
       let nativeExecutionStarted = false
+      let nativeExecutionSettled = false
       let cancellationRequested = false
       let cancellationPromise: Promise<void> | null = null
 
@@ -139,7 +182,10 @@ export const implementation: VersionedAPI<RelayV1> = {
         cancellationRequested = true
         if (!nativeExecutionStarted) return Promise.resolve()
 
-        cancellationPromise ??= cancel(request.id)
+        cancellationPromise ??= cancelNativeRequest(
+          request.id,
+          () => nativeExecutionSettled
+        )
         return cancellationPromise
       }
 
@@ -164,7 +210,9 @@ export const implementation: VersionedAPI<RelayV1> = {
             meta: request.meta,
           }
 
-          const response = execute(pluginRequest)
+          const response = execute(pluginRequest).finally(() => {
+            nativeExecutionSettled = true
+          })
           nativeExecutionStarted = true
           if (cancellationRequested) await cancelRequest()
           return response

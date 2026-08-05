@@ -1256,10 +1256,10 @@
     "data_schema": "Esquema de datos",
     "saved": "Respuesta guardada",
     "invalid_name": "Por favor proporciona un nombre para la respuesta",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Metadatos",
+    "no_metadata": "Esta respuesta no contiene metadatos",
+    "no_trailers": "Esta respuesta no contiene tráileres",
+    "trailers": "Tráileres"
   },
   "settings": {
     "accent_color": "Color de acentuación",
@@ -2335,10 +2335,10 @@
   "grpc": {
     "unsupported_title": "gRPC no está disponible en la plataforma actual",
     "unsupported_description": "Utiliza un interceptor compatible con HTTP/2 binario, como el interceptor nativo de la aplicación de escritorio.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Invocar",
+    "server_url": "URL del servidor gRPC",
+    "service": "Servicio",
+    "streaming": "transmisión",
     "url_placeholder": "http://localhost:8080"
   }
 }

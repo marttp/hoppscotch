@@ -639,10 +639,10 @@
     "video": "Video",
     "waiting_for_connection": "đang chờ kết nối",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Siêu dữ liệu",
+    "no_metadata": "Phản hồi này không có siêu dữ liệu",
+    "no_trailers": "Phản hồi này không có phần kết",
+    "trailers": "Phần kết"
   },
   "settings": {
     "accent_color": "Accent color",
@@ -1111,10 +1111,10 @@
   "grpc": {
     "unsupported_title": "gRPC không khả dụng trên nền tảng hiện tại",
     "unsupported_description": "Hãy dùng một interceptor hỗ trợ HTTP/2 nhị phân, chẳng hạn interceptor gốc của ứng dụng máy tính.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Gọi",
+    "server_url": "URL máy chủ gRPC",
+    "service": "Dịch vụ",
+    "streaming": "truyền phát",
     "url_placeholder": "http://localhost:8080"
   }
 }

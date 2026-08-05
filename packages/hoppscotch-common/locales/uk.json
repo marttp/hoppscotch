@@ -639,10 +639,10 @@
     "video": "Video",
     "waiting_for_connection": "очікування підключення",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Метадані",
+    "no_metadata": "Ця відповідь не містить метаданих",
+    "no_trailers": "Ця відповідь не містить трейлерів",
+    "trailers": "Трейлери"
   },
   "settings": {
     "accent_color": "Колір акценту",
@@ -1111,10 +1111,10 @@
   "grpc": {
     "unsupported_title": "gRPC недоступний на поточній платформі",
     "unsupported_description": "Використовуйте перехоплювач із підтримкою двійкового HTTP/2, наприклад вбудований перехоплювач настільного застосунку.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Викликати",
+    "server_url": "URL сервера gRPC",
+    "service": "Сервіс",
+    "streaming": "потокове передавання",
     "url_placeholder": "http://localhost:8080"
   }
 }

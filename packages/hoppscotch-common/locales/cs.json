@@ -1227,9 +1227,9 @@
     "saved": "Odpověď uložena",
     "invalid_name": "Zadejte prosím název odpovědi",
     "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "no_metadata": "Tato odpověď nemá žádná metadata",
+    "no_trailers": "Tato odpověď nemá žádné trailery",
+    "trailers": "Trailery"
   },
   "settings": {
     "accent_color": "Akcentní barva",
@@ -2304,9 +2304,9 @@
   "grpc": {
     "unsupported_title": "gRPC není na aktuální platformě dostupné",
     "unsupported_description": "Použijte interceptor s podporou binárního HTTP/2, například nativní interceptor desktopové aplikace.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
+    "invoke": "Vyvolat",
+    "server_url": "URL gRPC serveru",
+    "service": "Služba",
     "streaming": "streaming",
     "url_placeholder": "http://localhost:8080"
   }

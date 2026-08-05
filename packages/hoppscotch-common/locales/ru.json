@@ -634,10 +634,10 @@
     "video": "Видео",
     "waiting_for_connection": "Ожидание соединения",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Метаданные",
+    "no_metadata": "Этот ответ не содержит метаданных",
+    "no_trailers": "Этот ответ не содержит трейлеров",
+    "trailers": "Трейлеры"
   },
   "settings": {
     "accent_color": "Основной цвет",
@@ -1094,10 +1094,10 @@
   "grpc": {
     "unsupported_title": "gRPC недоступен на текущей платформе",
     "unsupported_description": "Используйте перехватчик с поддержкой двоичного HTTP/2, например встроенный перехватчик настольного приложения.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Вызвать",
+    "server_url": "URL сервера gRPC",
+    "service": "Сервис",
+    "streaming": "потоковая передача",
     "url_placeholder": "http://localhost:8080"
   }
 }

@@ -1256,10 +1256,10 @@
     "data_schema": "Veri Şeması",
     "saved": "Yanıt kaydedildi",
     "invalid_name": "Lütfen yanıt için bir ad girin",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Meta veri",
+    "no_metadata": "Bu yanıtta herhangi bir meta veri bulunmuyor",
+    "no_trailers": "Bu yanıtta herhangi bir trailer bulunmuyor",
+    "trailers": "Trailer'lar"
   },
   "settings": {
     "accent_color": "Vurgu rengi",
@@ -2335,10 +2335,10 @@
   "grpc": {
     "unsupported_title": "gRPC mevcut platformda kullanılamıyor",
     "unsupported_description": "Masaüstü uygulamasının yerel interceptor'ı gibi ikili HTTP/2 desteğine sahip bir interceptor kullanın.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Çalıştır",
+    "server_url": "gRPC sunucu URL'si",
+    "service": "Servis",
+    "streaming": "akış",
     "url_placeholder": "http://localhost:8080"
   }
 }

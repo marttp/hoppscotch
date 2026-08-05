@@ -640,9 +640,9 @@
     "waiting_for_connection": "wag vir verbinding",
     "xml": "XML",
     "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "no_metadata": "Hierdie antwoord bevat geen metadata nie",
+    "no_trailers": "Hierdie antwoord bevat geen sleepkoppe nie",
+    "trailers": "Sleepkoppe"
   },
   "settings": {
     "accent_color": "Aksent kleur",
@@ -1111,10 +1111,10 @@
   "grpc": {
     "unsupported_title": "gRPC is nie op die huidige platform beskikbaar nie",
     "unsupported_description": "Gebruik 'n onderskepper met binêre HTTP/2-ondersteuning, soos die ingeboude Desktop-onderskepper.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Roep aan",
+    "server_url": "gRPC-bediener-URL",
+    "service": "Diens",
+    "streaming": "stroming",
     "url_placeholder": "http://localhost:8080"
   }
 }

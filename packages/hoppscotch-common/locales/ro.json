@@ -639,10 +639,10 @@
     "video": "Video",
     "waiting_for_connection": "Așteptând conexiunea",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Metadate",
+    "no_metadata": "Acest răspuns nu conține metadate",
+    "no_trailers": "Acest răspuns nu conține trailere",
+    "trailers": "Trailere"
   },
   "settings": {
     "accent_color": "Culoare de accent",
@@ -1111,9 +1111,9 @@
   "grpc": {
     "unsupported_title": "gRPC nu este disponibil pe platforma curentă",
     "unsupported_description": "Folosiți un interceptor cu suport HTTP/2 binar, precum interceptorul nativ al aplicației desktop.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
+    "invoke": "Invocă",
+    "server_url": "URL server gRPC",
+    "service": "Serviciu",
     "streaming": "streaming",
     "url_placeholder": "http://localhost:8080"
   }

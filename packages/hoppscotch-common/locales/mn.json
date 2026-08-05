@@ -1257,10 +1257,10 @@
     "data_schema": "Өгөгдлийн схем",
     "saved": "Хариултыг хадгалсан",
     "invalid_name": "Хариуд нь нэр өгнө үү",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Мета өгөгдөл",
+    "no_metadata": "Энэ хариунд мета өгөгдөл алга",
+    "no_trailers": "Энэ хариунд төгсгөлийн толгой мэдээлэл алга",
+    "trailers": "Төгсгөлийн толгой мэдээлэл"
   },
   "script": {
     "inheriting": "-аас скриптүүдийг өвлөн авч байна",
@@ -2366,10 +2366,10 @@
   "grpc": {
     "unsupported_title": "gRPC одоогийн платформ дээр ашиглах боломжгүй",
     "unsupported_description": "Desktop аппын үндсэн interceptor зэрэг хоёртын HTTP/2 дэмждэг interceptor ашиглана уу.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Дуудах",
+    "server_url": "gRPC серверийн URL",
+    "service": "Үйлчилгээ",
+    "streaming": "урсгал",
     "url_placeholder": "http://localhost:8080"
   }
 }

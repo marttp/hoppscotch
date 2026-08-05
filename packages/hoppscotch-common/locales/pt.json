@@ -639,10 +639,10 @@
     "video": "Video",
     "waiting_for_connection": "aguardando conexão",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "Metadados",
+    "no_metadata": "Esta resposta não contém metadados",
+    "no_trailers": "Esta resposta não contém cabeçalhos finais",
+    "trailers": "Cabeçalhos finais"
   },
   "settings": {
     "accent_color": "Cor de destaque",
@@ -1111,9 +1111,9 @@
   "grpc": {
     "unsupported_title": "O gRPC não está disponível na plataforma atual",
     "unsupported_description": "Utilize um interceptor compatível com HTTP/2 binário, como o interceptor nativo da aplicação para computador.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
+    "invoke": "Invocar",
+    "server_url": "URL do servidor gRPC",
+    "service": "Serviço",
     "streaming": "streaming",
     "url_placeholder": "http://localhost:8080"
   }

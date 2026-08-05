@@ -639,10 +639,10 @@
     "video": "Video",
     "waiting_for_connection": "מחכה לחיבור",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "מטא-נתונים",
+    "no_metadata": "תגובה זו אינה מכילה מטא-נתונים",
+    "no_trailers": "תגובה זו אינה מכילה כותרות סיום",
+    "trailers": "כותרות סיום"
   },
   "settings": {
     "accent_color": "צבע הדגשה",
@@ -1111,10 +1111,10 @@
   "grpc": {
     "unsupported_title": "‏gRPC אינו זמין בפלטפורמה הנוכחית",
     "unsupported_description": "השתמשו במיירט התומך ב-HTTP/2 בינארי, כגון המיירט המקורי של יישום שולחן העבודה.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "הפעלה",
+    "server_url": "כתובת URL של שרת gRPC",
+    "service": "שירות",
+    "streaming": "הזרמה",
     "url_placeholder": "http://localhost:8080"
   }
 }

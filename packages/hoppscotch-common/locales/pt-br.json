@@ -750,9 +750,9 @@
     "data_schema": "Data Schema",
     "saved": "Resposta salva",
     "invalid_name": "Insira um nome para a resposta",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
+    "metadata": "Metadados",
+    "no_metadata": "Esta resposta não possui metadados",
+    "no_trailers": "Esta resposta não possui trailers",
     "trailers": "Trailers"
   },
   "settings": {
@@ -1278,9 +1278,9 @@
   "grpc": {
     "unsupported_title": "O gRPC não está disponível na plataforma atual",
     "unsupported_description": "Use um interceptor compatível com HTTP/2 binário, como o interceptor nativo do aplicativo para desktop.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
+    "invoke": "Invocar",
+    "server_url": "URL do servidor gRPC",
+    "service": "Serviço",
     "streaming": "streaming",
     "url_placeholder": "http://localhost:8080"
   }

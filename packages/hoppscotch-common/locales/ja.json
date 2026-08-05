@@ -639,10 +639,10 @@
     "video": "Video",
     "waiting_for_connection": "接続を待っています",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "metadata": "メタデータ",
+    "no_metadata": "このレスポンスにはメタデータがありません",
+    "no_trailers": "このレスポンスにはトレーラーがありません",
+    "trailers": "トレーラー"
   },
   "settings": {
     "accent_color": "アクセントの色",
@@ -1111,10 +1111,10 @@
   "grpc": {
     "unsupported_title": "現在のプラットフォームでは gRPC を利用できません",
     "unsupported_description": "デスクトップアプリのネイティブインターセプターなど、バイナリ HTTP/2 をサポートするインターセプターを使用してください。",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "呼び出す",
+    "server_url": "gRPC サーバー URL",
+    "service": "サービス",
+    "streaming": "ストリーミング",
     "url_placeholder": "http://localhost:8080"
   }
 }

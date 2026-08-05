@@ -640,9 +640,9 @@
     "waiting_for_connection": "Menunggu koneksi",
     "xml": "XML",
     "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "no_metadata": "Respons ini tidak memiliki metadata",
+    "no_trailers": "Respons ini tidak memiliki trailer",
+    "trailers": "Trailer"
   },
   "settings": {
     "accent_color": "Accent color",
@@ -1111,9 +1111,9 @@
   "grpc": {
     "unsupported_title": "gRPC tidak tersedia di platform saat ini",
     "unsupported_description": "Gunakan interceptor yang mendukung HTTP/2 biner, seperti interceptor native aplikasi desktop.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
+    "invoke": "Jalankan",
+    "server_url": "URL server gRPC",
+    "service": "Layanan",
     "streaming": "streaming",
     "url_placeholder": "http://localhost:8080"
   }

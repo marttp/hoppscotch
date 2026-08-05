@@ -640,9 +640,9 @@
     "waiting_for_connection": "venter på tilkobling",
     "xml": "XML",
     "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
-    "trailers": "Trailers"
+    "no_metadata": "Dette svaret har ingen metadata",
+    "no_trailers": "Dette svaret har ingen trailere",
+    "trailers": "Trailere"
   },
   "settings": {
     "accent_color": "Aksentfarge",
@@ -1111,10 +1111,10 @@
   "grpc": {
     "unsupported_title": "gRPC er ikke tilgjengelig på den nåværende plattformen",
     "unsupported_description": "Bruk en interceptor med støtte for binær HTTP/2, for eksempel den innebygde interceptoren i skrivebordsappen.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
-    "service": "Service",
-    "streaming": "streaming",
+    "invoke": "Kall",
+    "server_url": "URL til gRPC-server",
+    "service": "Tjeneste",
+    "streaming": "strømming",
     "url_placeholder": "http://localhost:8080"
   }
 }

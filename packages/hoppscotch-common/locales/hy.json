@@ -1226,10 +1226,10 @@
         "data_schema": "Տվյալների սխեմա",
         "saved": "Պատասխանը պահպանվել է",
         "invalid_name": "Խնդրում ենք տրամադրել անուն պատասխանի համար",
-        "metadata": "Metadata",
-        "no_metadata": "This response does not have any metadata",
-        "no_trailers": "This response does not have any trailers",
-        "trailers": "Trailers"
+        "metadata": "Մետատվյալներ",
+        "no_metadata": "Այս պատասխանը մետատվյալներ չունի",
+        "no_trailers": "Այս պատասխանը վերջնամասեր չունի",
+        "trailers": "Վերջնամասեր"
     },
     "settings": {
         "accent_color": "Շեշտադրման գույն",
@@ -2304,10 +2304,10 @@
     "grpc": {
         "unsupported_title": "gRPC-ն հասանելի չէ ընթացիկ հարթակում",
         "unsupported_description": "Օգտագործեք բինար HTTP/2 աջակցող interceptor, օրինակ՝ աշխատասեղանի հավելվածի ներկառուցված interceptor-ը։",
-        "invoke": "Invoke",
-        "server_url": "gRPC server URL",
-        "service": "Service",
-        "streaming": "streaming",
+        "invoke": "Կանչել",
+        "server_url": "gRPC սերվերի URL",
+        "service": "Ծառայություն",
+        "streaming": "հոսքային",
         "url_placeholder": "http://localhost:8080"
     }
 }

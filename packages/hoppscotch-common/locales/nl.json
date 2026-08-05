@@ -639,9 +639,9 @@
     "video": "Video",
     "waiting_for_connection": "wachten op verbinding",
     "xml": "XML",
-    "metadata": "Metadata",
-    "no_metadata": "This response does not have any metadata",
-    "no_trailers": "This response does not have any trailers",
+    "metadata": "Metagegevens",
+    "no_metadata": "Dit antwoord bevat geen metagegevens",
+    "no_trailers": "Dit antwoord bevat geen trailers",
     "trailers": "Trailers"
   },
   "settings": {
@@ -1111,8 +1111,8 @@
   "grpc": {
     "unsupported_title": "gRPC is niet beschikbaar op het huidige platform",
     "unsupported_description": "Gebruik een interceptor met ondersteuning voor binaire HTTP/2, zoals de native interceptor van de desktop-app.",
-    "invoke": "Invoke",
-    "server_url": "gRPC server URL",
+    "invoke": "Aanroepen",
+    "server_url": "URL van gRPC-server",
     "service": "Service",
     "streaming": "streaming",
     "url_placeholder": "http://localhost:8080"

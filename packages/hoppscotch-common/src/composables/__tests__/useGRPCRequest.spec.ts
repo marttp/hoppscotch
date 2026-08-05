@@ -40,15 +40,22 @@ service EchoService { rpc Echo(EchoRequest) returns (EchoResponse); }
 `
 
 describe("useGRPCRequest", () => {
-  it("keeps unary invocation and cancellation single-flight", async () => {
+  it("allows another invocation while cancellation is still settling", async () => {
     let resolveExecution:
       | ((result: E.Either<"cancellation", never>) => void)
       | undefined
     const response = new Promise<E.Either<"cancellation", never>>((resolve) => {
       resolveExecution = resolve
     })
-    const cancel = vi.fn(async () => {})
-    executeMock.mockReturnValue({ cancel, response })
+    let resolveCancellation: (() => void) | undefined
+    const cancellation = new Promise<void>((resolve) => {
+      resolveCancellation = resolve
+    })
+    const cancel = vi.fn(() => cancellation)
+    executeMock.mockReturnValueOnce({ cancel, response }).mockReturnValueOnce({
+      cancel: vi.fn(async () => {}),
+      response: Promise.resolve(E.left("cancellation")),
+    })
 
     const request = getDefaultGRPCRequest()
     request.protoFiles = [{ name: "echo.proto", content: PROTO }]
@@ -64,18 +71,23 @@ describe("useGRPCRequest", () => {
     })
 
     const firstSend = grpc.send()
-    const secondSend = grpc.send()
-
     expect(document.value.error).toBeNull()
     expect(executeMock).toHaveBeenCalledOnce()
     expect(grpc.isLoading.value).toBe(true)
 
-    await grpc.cancel()
+    const cancellationRequest = grpc.cancel()
     expect(cancel).toHaveBeenCalledOnce()
+    expect(grpc.isLoading.value).toBe(false)
+
+    const secondSend = grpc.send()
+    expect(executeMock).toHaveBeenCalledTimes(2)
+
+    resolveCancellation?.()
+    await cancellationRequest
+    await secondSend
 
     resolveExecution?.(E.left("cancellation"))
     await firstSend
-    await secondSend
 
     expect(grpc.isLoading.value).toBe(false)
     expect(document.value.response).toBeNull()

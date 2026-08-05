@@ -147,7 +147,16 @@ export function useGRPCRequest(document: Ref<HoppGRPCDocument>) {
     }
   }
 
-  const cancel = async () => cancelCurrent?.()
+  const cancel = async () => {
+    const cancelInvocation = cancelCurrent
+    if (!cancelInvocation) return
+
+    ++invocationSequence
+    cancelCurrent = null
+    isLoading.value = false
+
+    await cancelInvocation()
+  }
 
   return { services, methods, schemaError, isParsing, isLoading, send, cancel }
 }
